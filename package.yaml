@@ -1,0 +1,56 @@
+name: LegalServerHS
+version: 0.1.0.0
+github: "NateV/LegalServerHS"
+license: BSD3
+author: "Nate Vogel"
+maintainer: "example@example.com"
+copyright: "2020 Author name here"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description: Please see the README on GitHub at <https://github.com/githubuser/LegalServerHS#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - req
+  - cmdargs
+  - text
+  - time
+  - xeno
+  - ini == 0.4.1
+  - bytestring
+  - containers
+
+library:
+  source-dirs: src
+
+executables:
+  LegalServerHS-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - LegalServerHS
+
+tests:
+  LegalServerHS-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - LegalServerHS
