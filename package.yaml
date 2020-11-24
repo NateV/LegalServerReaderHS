@@ -29,12 +29,13 @@ dependencies:
   - ini == 0.4.1
   - bytestring
   - containers
+  - csv
 
 library:
   source-dirs: src
 
 executables:
-  LegalServerHS-exe:
+  lsreports:
     main: Main.hs
     source-dirs: app
     ghc-options:

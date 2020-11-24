@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6b83ce09ec09958b965f39e13cd8458898a23787e1b81808aad8924123c593d4
+-- hash: d95ad5e553315ff719782e7a55f2c15a1e4432331b422c1befddc9c9348ffed2
 
 name:           LegalServerHS
 version:        0.1.0.0
@@ -37,6 +37,7 @@ library
     , bytestring
     , cmdargs
     , containers
+    , csv
     , ini ==0.4.1
     , req
     , text
@@ -44,7 +45,7 @@ library
     , xeno
   default-language: Haskell2010
 
-executable LegalServerHS-exe
+executable lsreports
   main-is: Main.hs
   other-modules:
       Paths_LegalServerHS
@@ -57,6 +58,7 @@ executable LegalServerHS-exe
     , bytestring
     , cmdargs
     , containers
+    , csv
     , ini ==0.4.1
     , req
     , text
@@ -78,6 +80,7 @@ test-suite LegalServerHS-test
     , bytestring
     , cmdargs
     , containers
+    , csv
     , ini ==0.4.1
     , req
     , text
