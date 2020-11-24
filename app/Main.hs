@@ -3,6 +3,8 @@
 
 module Main where
 
+import Data.ByteString.Lazy.Internal (unpackChars)
+import Data.Csv (encode)
 import Data.List (intercalate)
 import LegalServerReader (fetchReport, toCSVStyle)
 import System.Console.CmdArgs
@@ -10,20 +12,31 @@ import System.Console.CmdArgs
     Default (def),
     Typeable,
     cmdArgs,
+    help,
+    program,
+    summary,
+    (&=),
   )
 
-data Opts = Opts {configPath :: String, outputFormat :: String} deriving (Show, Data, Typeable)
+data Opts = Opts {configPath :: String, report :: String, outputFormat :: String} deriving (Show, Data, Typeable)
 
-opts = Opts {configPath = def, outputFormat = "csv"}
+lsreports =
+  Opts
+    { configPath = def &= help "Path to api configuration file",
+      report = def &= help "Name of the section in the configuration file identifying the report to download",
+      outputFormat = "csv" &= help "Format for output (only csv supported for now)"
+    }
+    &= summary "Client for using the LegalServer Reports API."
+    &= program "lsreports"
 
 main :: IO ()
 main = do
-  args <- cmdArgs opts
+  args <- cmdArgs lsreports
   let outputType = outputFormat args
-  rpt <- fetchReport (configPath args)
+  rpt <- fetchReport (configPath args) (report args)
   case rpt of
     Left errs -> print errs
     Right rpt' ->
       case outputType of
-        "csv" -> mapM_ putStrLn $ map (intercalate ",") $ toCSVStyle rpt'
+        "csv" -> putStrLn $ unpackChars $ encode $ toCSVStyle rpt'
         _ -> print $ show rpt

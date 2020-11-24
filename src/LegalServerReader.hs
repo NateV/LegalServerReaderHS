@@ -97,10 +97,10 @@ concatCreds eitherCreds = do
   let (errs, creds) = partitionEithers eitherCreds
   if not $ null errs then Left errs else Right creds
 
-readCredentials :: String -> IO (Either [String] LegalServerCreds)
-readCredentials credsPath = do
+readCredentials :: String -> String -> IO (Either [String] LegalServerCreds)
+readCredentials credsPath reportToGet = do
   credFile <- readIniFile credsPath
-  let creds = concatCreds [lookupValueEither credFile "global" "site_root", lookupValueEither credFile "global" "api_user", lookupValueEither credFile "global" "api_pass", lookupValueEither credFile "Timeslips" "id", lookupValueEither credFile "Timeslips" "key"]
+  let creds = concatCreds [lookupValueEither credFile "global" "site_root", lookupValueEither credFile "global" "api_user", lookupValueEither credFile "global" "api_pass", lookupValueEither credFile (T.pack reportToGet) "id", lookupValueEither credFile (T.pack reportToGet) "key"]
   case creds of
     Left errs -> return $ Left errs
     Right credList -> return $ credsFromList credList
@@ -162,9 +162,9 @@ parseLSReport rawXML =
         Left err -> Left err
         Right node -> Right $ fmap parseReportRow (Xeno.children node)
 
-fetchReport :: String -> IO (Either [String] [RowMap])
-fetchReport credsPath = do
-  creds <- readCredentials credsPath
+fetchReport :: String -> String -> IO (Either [String] [RowMap])
+fetchReport credsPath reportToGet = do
+  creds <- readCredentials credsPath reportToGet
   case creds of
     Left errs -> return $ Left errs
     Right validCreds -> do

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d95ad5e553315ff719782e7a55f2c15a1e4432331b422c1befddc9c9348ffed2
+-- hash: bfc74c0009b153516d43743dd6b5f4fff7760fe8ae21fae6e1fd65f8c495008e
 
 name:           LegalServerHS
 version:        0.1.0.0
@@ -35,9 +35,9 @@ library
   build-depends:
       base >=4.7 && <5
     , bytestring
+    , cassava
     , cmdargs
     , containers
-    , csv
     , ini ==0.4.1
     , req
     , text
@@ -56,9 +56,9 @@ executable lsreports
       LegalServerHS
     , base >=4.7 && <5
     , bytestring
+    , cassava
     , cmdargs
     , containers
-    , csv
     , ini ==0.4.1
     , req
     , text
@@ -78,9 +78,9 @@ test-suite LegalServerHS-test
       LegalServerHS
     , base >=4.7 && <5
     , bytestring
+    , cassava
     , cmdargs
     , containers
-    , csv
     , ini ==0.4.1
     , req
     , text
