@@ -4,16 +4,16 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bfc74c0009b153516d43743dd6b5f4fff7760fe8ae21fae6e1fd65f8c495008e
+-- hash: baa3502658c16be7d02167095fcb2cd8c2cc422dde77366317a4e14abe46b419
 
 name:           LegalServerHS
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/LegalServerHS#readme>
+description:    Please see the README on GitHub at <https://github.com/NateV/LegalServerHS#readme>
 homepage:       https://github.com/NateV/LegalServerHS#readme
 bug-reports:    https://github.com/NateV/LegalServerHS/issues
 author:         Nate Vogel
 maintainer:     example@example.com
-copyright:      2020 Author name here
+copyright:      2020 Nate Vogel
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
