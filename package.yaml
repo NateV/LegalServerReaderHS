@@ -1,5 +1,5 @@
 name: LegalServerHS
-version: 0.1.0.0
+version: 0.1.0.1
 github: "NateV/LegalServerHS"
 license: BSD3
 author: "Nate Vogel"
@@ -7,7 +7,7 @@ maintainer: "example@example.com"
 copyright: "2020 Nate Vogel"
 
 extra-source-files:
-  - README.md
+  - Readme.md
   - ChangeLog.md
 
 # Metadata used when publishing your package

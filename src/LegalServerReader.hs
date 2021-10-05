@@ -1,11 +1,15 @@
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeSynonymInstances #-}
 
 module LegalServerReader where
 
 import Control.Monad.IO.Class
 import qualified Data.ByteString as B
-import Data.ByteString.Char8 (unpack)
+import Data.ByteString.Char8 (pack, unpack)
+import Data.ByteString.Lazy.Char8 (ByteString)
 import Data.Char (digitToInt, isDigit)
+import Data.Csv (Header, ToNamedRecord, encodeByName, header, namedRecord, toNamedRecord, (.=))
 import Data.Either
 import Data.Ini
 import Data.List (intersperse)
@@ -181,12 +185,18 @@ getRowValues colList row =
   let funcsToFindKeysInOrder = map (\k m -> fromMaybe "" (fromMaybe Nothing $ M.lookup k m)) colList
    in funcsToFindKeysInOrder <*> pure row
 
-getRowValues' :: RowMap -> [String]
-getRowValues' r = ["Ab", "Bb"]
+-- -- | An instance that tells Cassava how to turn a RowMap into a CSV row.
+-- --   Appears not to be necessary because cassava already knows how to use Maps.
+-- --   Thanks, compiler, for finding overlapping instances!
+-- instance ToNamedRecord RowMap where
+--   toNamedRecord r = namedRecord $ M.toList . keysToByteString . valsToByteStringWithDefault $ r
+--     where
+--       keysToByteString = M.mapKeys pack
+--       valsToByteStringWithDefault = M.map (pack . fromMaybe mempty)
 
-toCSVStyle :: [RowMap] -> [[String]]
+toCSVStyle :: [RowMap] -> ByteString
 toCSVStyle report =
   let firstRow = head report
-      columnNames = M.keys firstRow
-      rows = map (\r -> getRowValues columnNames r) report
-   in columnNames : rows
+      columnNames = pack <$> M.keys firstRow
+      hdr = header columnNames
+   in encodeByName hdr report

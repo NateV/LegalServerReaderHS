@@ -1,13 +1,13 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: baa3502658c16be7d02167095fcb2cd8c2cc422dde77366317a4e14abe46b419
+-- hash: 353335c0003ae8e80f839867f97c095bc2de610ab6518cd78b229edf37bdeade
 
 name:           LegalServerHS
-version:        0.1.0.0
+version:        0.1.0.1
 description:    Please see the README on GitHub at <https://github.com/NateV/LegalServerHS#readme>
 homepage:       https://github.com/NateV/LegalServerHS#readme
 bug-reports:    https://github.com/NateV/LegalServerHS/issues
@@ -18,7 +18,7 @@ license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
-    README.md
+    Readme.md
     ChangeLog.md
 
 source-repository head
