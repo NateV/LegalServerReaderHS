@@ -38,5 +38,5 @@ main = do
     Left errs -> print errs
     Right rpt' ->
       case outputType of
-        "csv" -> putStrLn $ unpackChars $ encode $ toCSVStyle rpt'
+        "csv" -> print . toCSVStyle $ rpt'
         _ -> print $ show rpt
